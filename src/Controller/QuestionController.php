@@ -3,6 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Question;
+use App\Entity\Response;
+use App\Form\QuestionType;
+use App\Form\ResponseType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -21,14 +25,60 @@ class QuestionController extends AbstractController
     }
 
     /**
-     * @Route("/question/{id}", name="show_question")
+     * @Route("/question/{id}", name="show_question", requirements={"id":"\d+"})
      */
-    public function showQuestion(Question $question)
+    public function showQuestion(Request $request, Question $question)
     {   
         $question = $this->getDoctrine()->getRepository(Question::class)->find($question);
 
+        $response = new Response();
+
+        $form = $this->createForm(ResponseType::class, $response);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $response = $form->getData();
+            $response->setQuestion($question);
+    
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($response);
+            $entityManager->flush();
+    
+            return $this->redirectToRoute('show_question', ['id' => $question->getId()]);
+        }
+
         return $this->render('question/show_question.html.twig', [
             'question' => $question,
+            'responseForm' => $form->createView()
+        ]);
+    }
+    
+    /**
+     * @Route("/question/add", name="add_question")
+     */
+    public function addQuestion(Request $request)
+    {   
+        $question = new Question();
+
+        $form = $this->createForm(QuestionType::class, $question);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $question = $form->getData();
+    
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($question);
+            $entityManager->flush();
+    
+            return $this->redirectToRoute('show_question', ['id' => $question->getId()]);
+        }
+
+        return $this->render('question/add_question.html.twig', [
+            'questionForm' => $form->createView(),
         ]);
     }
 }

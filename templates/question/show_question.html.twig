@@ -18,7 +18,21 @@
 
 {% endfor %}
 
+<h3>Répondre à la question</h3>
 
+{{ form_start(responseForm, { 'attr' : { 'class': 'form-container' } }) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(responseForm) }}
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-10">
+            {{ form_widget(responseForm.body, { 'attr': { 'class' : 'form-control', 'placeholder' : 'Répondre à la question'}} ) }}
+        </div>
+    </div>
+        {{ form_widget(responseForm.save, { 'attr': { 'class' : 'btn btn-primary'}} ) }}
+    </div>
+{{ form_end(responseForm) }}
 </div>
 
 {% endblock %}

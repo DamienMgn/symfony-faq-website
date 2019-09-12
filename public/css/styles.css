@@ -1,0 +1,32 @@
+.container {
+    position: relative;
+    padding-top: 1em;
+    z-index: 2;
+    top: 59.5px;
+}
+
+body {
+    position: relative;
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}
+
+.form-group {
+    display: flex;
+    justify-content: center;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-group .col-sm-10 {
+    width: 75em;
+}
