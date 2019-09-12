@@ -1,0 +1,11 @@
+App\Entity\Question:
+    question_{1..15}:
+        title: '<word()>'
+        body: '<text()>'
+        createdAt: '<date_create()>'
+  
+App\Entity\Response:
+    response{1..150}:
+        body: '<text()>'
+        createdAt: '<date_create()>'
+        question: '@question_*'
