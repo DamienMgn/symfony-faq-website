@@ -1,8 +1,14 @@
+App\Entity\User:
+    user_{1..2}:
+        email: '<email()>'
+        password: '<text()>'
+
 App\Entity\Question:
     question_{1..15}:
         title: '<word()>'
         body: '<text()>'
         createdAt: '<date_create()>'
+        user: '@user_*'
   
 App\Entity\Response:
     response{1..150}:

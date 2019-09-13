@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Question;
 use App\Entity\Response;
 use App\Form\QuestionType;
 use App\Form\ResponseType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -58,7 +60,7 @@ class QuestionController extends AbstractController
     /**
      * @Route("/question/add", name="add_question")
      */
-    public function addQuestion(Request $request)
+    public function addQuestion(Request $request, Security $security)
     {   
         $question = new Question();
 
@@ -69,6 +71,9 @@ class QuestionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $question = $form->getData();
+
+            $user = $security->getUser();
+            $question->setUser($user);
     
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($question);
