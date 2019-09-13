@@ -18,6 +18,8 @@
 
 {% endfor %}
 
+{% if is_granted(['ROLE_ADMIN', 'ROLE_USER']) %}
+
 <h3>Répondre à la question</h3>
 
 {{ form_start(responseForm, { 'attr' : { 'class': 'form-container' } }) }}
@@ -34,5 +36,7 @@
     </div>
 {{ form_end(responseForm) }}
 </div>
+
+{% endif %}
 
 {% endblock %}
