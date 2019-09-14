@@ -5,12 +5,15 @@
 <div class="container">
 
 {% for question in questions %}
-
+    
     <div class="card bg-light mb-3 question-container">
-        <div class="card-header"><a href="{{ path('show_question', {'id':question.id}) }}">{{question.title}}</a></div>
+        <div class="card-header {% if app.user.id is defined and app.user.id == question.user.id %} bg-warning {% endif %} ">
+            <a href="{{ path('show_question', {'id':question.id}) }}">{{question.title}}</a>
+        </div>
         <div class="card-body">
             <p class="card-text">{{question.body}}</p>
         </div>
+        <div class="card-header">Posé par {{ question.user.email }} le {{ question.createdAt | date('Y-m-d') }}</div>
     </div>
 
 {% endfor %}

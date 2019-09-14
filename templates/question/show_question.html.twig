@@ -10,7 +10,7 @@
 {% for response in question.responses %}
 
     <div class="card bg-light mb-3 question-container">
-        <div class="card-header">Réponse le {{ response.createdAt | date('Y-m-d')}} par {{ response.id }}</div>
+        <div class="card-header">Réponse le {{ response.createdAt | date('Y-m-d') }} par {{ response.id }}</div>
         <div class="card-body">
             <p class="card-text">{{ response.body }}</p>
         </div>
