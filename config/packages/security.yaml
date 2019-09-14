@@ -37,6 +37,7 @@ security:
         - { path: ^/account, roles: ROLE_USER }
         - { path: ^/question/add, roles: ROLE_USER }
         - { path: ^/question/select_response/, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
     
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER

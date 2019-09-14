@@ -18,7 +18,10 @@ class QuestionResponseController extends AbstractController
      */
     public function index()
     {   
-        $questions = $this->getDoctrine()->getRepository(Question::class)->findAll();
+        $questions = $this->getDoctrine()->getRepository(Question::class)->findBy(
+            ['isDisplay' => '0'],
+            ['createdAt' => 'DESC']
+        );
 
         return $this->render('question/index.html.twig', [
             'questions' => $questions,
@@ -35,6 +38,8 @@ class QuestionResponseController extends AbstractController
         $response = new Response();
 
         $form = $this->createForm(ResponseType::class, $response);
+
+        $responses = $this->getDoctrine()->getRepository(Response::class)->findByResponsesDisplay('0', $question);
 
         $form->handleRequest($request);
 
@@ -55,7 +60,8 @@ class QuestionResponseController extends AbstractController
 
         return $this->render('question/show_question.html.twig', [
             'question' => $question,
-            'responseForm' => $form->createView()
+            'responseForm' => $form->createView(),
+            'responses' => $responses
         ]);
     }
     

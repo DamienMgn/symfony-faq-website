@@ -12,7 +12,7 @@
     <p>{{ question.body }}</p>
     <div class="responses-container">
 
-{% for response in question.responses %}
+{% for response in responses %}
 
     <div class="card bg-{% if question.correctResponse.id is defined and question.correctResponse.id == response.id %}warning correct-response
                         {% else %}light wrong-response
@@ -28,6 +28,13 @@
             <form method="POST" action="{{ path('select_response', {'question':question.id, 'response':response.id}) }}">
                 <button class="btn btn-lg btn-warning btn-correct-response" type="submit">
                     Valider
+                </button>
+            </form>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+            <form method="POST" action="{{ path('moderate_response', {'response': response.id}) }}">
+                <button class="btn btn-lg btn-danger btn-correct-response" type="submit">
+                    Modérer
                 </button>
             </form>
             {% endif %}

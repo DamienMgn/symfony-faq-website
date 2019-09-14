@@ -55,6 +55,11 @@ class Question
      */
     private $correctResponse;
 
+    /**
+     * @ORM\Column(name="isDisplay", type="boolean")
+     */
+    private $isDisplay;
+
     public function __construct()
     {
         $this->responses = new ArrayCollection();
@@ -165,6 +170,18 @@ class Question
     public function setCorrectResponse(?Response $correctResponse): self
     {
         $this->correctResponse = $correctResponse;
+
+        return $this;
+    }
+
+    public function getIsDisplay()
+    {
+        return $this->isDisplay;
+    }
+
+    public function setIsDisplay($isDisplay): self
+    {
+        $this->isDisplay = $isDisplay;
 
         return $this;
     }

@@ -16,9 +16,11 @@
         <div class="card-body">
             <p class="card-text">{{question.body}}</p>
         </div>
-        <div class="card-header">Posé par 
-            <span class="strong">{{ question.user.userName }}</span> le  
-            <span class="strong">{{ question.createdAt | date('Y-m-d') }}</span>
+        <div class="card-header">
+            <p>Posé par 
+                <span class="strong">{{ question.user.userName }}</span> le  
+                <span class="strong">{{ question.createdAt | date('Y-m-d') }}</span>
+            </p>
         </div>
     </div>
 

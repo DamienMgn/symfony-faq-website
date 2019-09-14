@@ -36,15 +36,16 @@ class ResponseRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Response
+
+    public function findByResponsesDisplay($display, $question): array
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $qb = $this->createQueryBuilder('r')
+            ->andWhere('r.isDisplay = :dis')
+            ->setParameter('dis', $display)
+            ->andWhere('r.question = :question')
+            ->setParameter('question', $question)
+            ->getQuery();
+
+            return $qb->execute();
     }
-    */
 }

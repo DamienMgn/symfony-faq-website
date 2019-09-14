@@ -43,6 +43,11 @@ class Response
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isDisplay;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -109,6 +114,18 @@ class Response
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getIsDisplay()
+    {
+        return $this->isDisplay;
+    }
+
+    public function setIsDisplay($isDisplay): self
+    {
+        $this->isDisplay = $isDisplay;
 
         return $this;
     }
