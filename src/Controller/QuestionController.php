@@ -43,6 +43,9 @@ class QuestionController extends AbstractController
 
             $response = $form->getData();
             $response->setQuestion($question);
+
+            $user = $question->getUser();
+            $response->setUser($user);
     
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($response);

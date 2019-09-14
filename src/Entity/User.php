@@ -40,9 +40,20 @@ class User implements UserInterface
      */
     private $questions;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $userName;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Response", mappedBy="user", orphanRemoval=true)
+     */
+    private $responses;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
+        $this->responses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -69,7 +80,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->userName;
     }
 
     /**
@@ -148,6 +159,44 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($question->getUser() === $this) {
                 $question->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function setUserName(string $userName): self
+    {
+        $this->userName = $userName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Response[]
+     */
+    public function getResponses(): Collection
+    {
+        return $this->responses;
+    }
+
+    public function addResponse(Response $response): self
+    {
+        if (!$this->responses->contains($response)) {
+            $this->responses[] = $response;
+            $response->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResponse(Response $response): self
+    {
+        if ($this->responses->contains($response)) {
+            $this->responses->removeElement($response);
+            // set the owning side to null (unless already changed)
+            if ($response->getUser() === $this) {
+                $response->setUser(null);
             }
         }
 

@@ -1,3 +1,15 @@
+
+html {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .container {
     position: relative;
     padding-top: 1em;
@@ -5,9 +17,6 @@
     top: 59.5px;
 }
 
-body {
-    position: relative;
-}
 .navbar {
     position: fixed;
     top: 0;
@@ -28,5 +37,32 @@ body {
 }
 
 .form-group .col-sm-10 {
-    width: 80vw;
+    width: 90vw;
+}
+
+.strong {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.footer {
+    background-color: #38B875;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10em;
+    width: 100vw;
+    margin-top: 3em;
+}
+
+.footer-app {
+    position: relative;
+    top: 59.5px;
+}
+
+.footer-security {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0
 }

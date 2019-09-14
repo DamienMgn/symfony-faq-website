@@ -4,13 +4,17 @@
 
 <div class="container">
 
-    <h1>{{ question.title }}</h1>
+    <h3 class="h3 mb-3 font-weight-normal">{{ question.title }}</h3>
+    <p>Question posé par 
+        <span class="strong">{{ question.user.userName }}</span> le
+        <span class="strong">{{ question.createdAt | date('Y-m-d') }}</span>
+    </p>
     <p>{{ question.body }}</p>
 
 {% for response in question.responses %}
 
     <div class="card bg-light mb-3 question-container">
-        <div class="card-header">Réponse le {{ response.createdAt | date('Y-m-d') }} par {{ response.id }}</div>
+        <div class="card-header">Réponse le <span class="strong">{{ response.createdAt | date('Y-m-d') }}</span> par <span class="strong">{{ response.user.userName }}</span></div>
         <div class="card-body">
             <p class="card-text">{{ response.body }}</p>
         </div>
@@ -29,14 +33,16 @@
 
     <div class="form-group row">
         <div class="col-sm-10">
-            {{ form_widget(responseForm.body, { 'attr': { 'class' : 'form-control', 'placeholder' : 'Répondre à la question'}} ) }}
+            {{ form_widget(responseForm.body, { 'attr': { 'class' : 'form-control form-response', 'placeholder' : 'Répondre à la question'}} ) }}
         </div>
     </div>
+    <div>
         {{ form_widget(responseForm.save, { 'attr': { 'class' : 'btn btn-primary'}} ) }}
     </div>
 {{ form_end(responseForm) }}
-</div>
 
 {% endif %}
+
+</div>
 
 {% endblock %}

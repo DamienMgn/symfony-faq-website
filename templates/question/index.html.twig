@@ -3,9 +3,10 @@
 {% block body %}
 
 <div class="container">
-
+<h1>Bien sur FaqOClock</h1>
+<h3 class="h3 mb-3 font-weight-normal">Posez vos questions la communauté y répondra !</h3>
 {% for question in questions %}
-    
+
     <div class="card bg-light mb-3 question-container">
         <div class="card-header {% if app.user.id is defined and app.user.id == question.user.id %} bg-warning {% endif %} ">
             <a href="{{ path('show_question', {'id':question.id}) }}">{{question.title}}</a>
@@ -13,11 +14,22 @@
         <div class="card-body">
             <p class="card-text">{{question.body}}</p>
         </div>
-        <div class="card-header">Posé par {{ question.user.email }} le {{ question.createdAt | date('Y-m-d') }}</div>
+        <div class="card-header">Posé par 
+            <span class="strong">{{ question.user.userName }}</span> le 
+            <span class="strong">{{ question.createdAt | date('Y-m-d') }}</span>
+        </div>
     </div>
 
 {% endfor %}
 
 </div>
+
+{% endblock %}
+
+{% block footer %}
+
+<footer class="footer footer-app">
+    <h1>Footer</h1>
+</footer>
 
 {% endblock %}
