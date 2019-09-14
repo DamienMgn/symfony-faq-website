@@ -10,17 +10,36 @@
         <span class="strong">{{ question.createdAt | date('Y-m-d') }}</span>
     </p>
     <p>{{ question.body }}</p>
+    <div class="responses-container">
 
 {% for response in question.responses %}
 
-    <div class="card bg-light mb-3 question-container">
-        <div class="card-header">Réponse le <span class="strong">{{ response.createdAt | date('Y-m-d') }}</span> par <span class="strong">{{ response.user.userName }}</span></div>
+    <div class="card bg-{% if question.correctResponse.id is defined and question.correctResponse.id == response.id %}warning correct-response
+                        {% else %}light wrong-response
+                        {% endif %}mb-3">
+        <div class="card-header">
+            <p>Réponse le 
+                <span class="strong">{{ response.createdAt | date('Y-m-d') }}</span> par
+                <span class="strong">{{ response.user.userName }}</span>
+            </p>
+            {% if question.correctResponse.id is defined and question.correctResponse.id == response.id %}
+            <span class="strong">Réponse validée</span>
+            {% elseif app.user.id == question.user.id %}
+            <form method="POST" action="{{ path('select_response', {'question':question.id, 'response':response.id}) }}">
+                <button class="btn btn-lg btn-warning btn-correct-response" type="submit">
+                    Valider
+                </button>
+            </form>
+            {% endif %}
+        </div>
         <div class="card-body">
             <p class="card-text">{{ response.body }}</p>
         </div>
     </div>
 
 {% endfor %}
+
+    </div>
 
 {% if is_granted(['ROLE_ADMIN', 'ROLE_USER']) %}
 

@@ -40,9 +40,36 @@ body {
     width: 90vw;
 }
 
+.card-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.card-header p {
+    margin: 0;
+    width: 85%
+}
+
+.btn-correct-response {
+    padding: 3px 7px 3px 7px;
+}
+
 .strong {
     font-weight: bold;
     font-style: italic;
+}
+
+.responses-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.correct-response {
+    order: 0;
+}
+
+.wrong-response {
+    order:1;
 }
 
 .footer {

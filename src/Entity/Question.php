@@ -30,6 +30,7 @@ class Question
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Response", mappedBy="question", orphanRemoval=true)
+     * @ORM\OrderBy({"createdAt" = "ASC"})
      */
     private $responses;
 
@@ -48,6 +49,11 @@ class Question
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Response", cascade={"persist", "remove"})
+     */
+    private $correctResponse;
 
     public function __construct()
     {
@@ -147,6 +153,18 @@ class Question
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCorrectResponse(): ?Response
+    {
+        return $this->correctResponse;
+    }
+
+    public function setCorrectResponse(?Response $correctResponse): self
+    {
+        $this->correctResponse = $correctResponse;
 
         return $this;
     }

@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class QuestionController extends AbstractController
+class QuestionResponseController extends AbstractController
 {
     /**
      * @Route("/", name="index")
@@ -88,5 +88,26 @@ class QuestionController extends AbstractController
         return $this->render('question/add_question.html.twig', [
             'questionForm' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/question/select_response/{response}/{question}", methods={"POST"}, name="select_response")
+     */
+    public function selectResponse(Security $security, Question $question, Response $response)
+    {   
+
+        $userSecurity = $security->getUser()->getId();
+        $userQuestion = $question->getUser()->getId();
+
+        if ($userSecurity === $userQuestion) {
+            $question->setCorrectResponse($response);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($question);
+    
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('show_question', ['id' => $question->getId()]);
     }
 }

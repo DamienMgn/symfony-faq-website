@@ -12,8 +12,11 @@
         {{ form_errors(registerForm) }}
     </div>
 
+        {{ form_label(registerForm.username, null, {'label_attr': {'class': 'sr-only'}} ) }}
+            {{ form_widget(registerForm.username, { 'attr': { 'class' : 'form-control', 'placeholder': 'Username', 'autofocus': true}} ) }}
+
         {{ form_label(registerForm.email, null, {'label_attr': {'class': 'sr-only'}} ) }}
-            {{ form_widget(registerForm.email, { 'attr': { 'class' : 'form-control', 'placeholder': 'Email', 'autofocus': true}} ) }}
+            {{ form_widget(registerForm.email, { 'attr': { 'class' : 'form-control', 'placeholder': 'Email'}} ) }}
 
         {{ form_label(registerForm.password, null, {'label_attr': {'class': 'sr-only'}} ) }}
             {{ form_widget(registerForm.password, { 'attr': { 'class' : 'form-control', 'placeholder': 'Password'}} ) }}
