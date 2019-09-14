@@ -11,6 +11,7 @@ body {
 }
 
 .container {
+    min-height: calc(100vh - 250px);
     position: relative;
     padding-top: 1em;
     z-index: 2;
@@ -85,10 +86,6 @@ body {
 .footer-app {
     position: relative;
     top: 59.5px;
-}
-
-.footer-security {
-    position: absolute;
     bottom: 0;
     left: 0;
     right: 0

@@ -55,16 +55,7 @@
 
       {% block footer %}
       {% set route_name = app.request.attributes.get('_route') %}
-      <footer 
-      class="footer footer-{% if 
-                            route_name == 'app_login' 
-                            or route_name == 'app_register' 
-                            or route_name == 'account'
-                            or route_name == 'add_question'
-                            or route_name == 'account_update'
-                            %}security
-                            {% else %}app
-                            {% endif %}">
+      <footer class="footer footer-app">
           <h1>Footer</h1>
       </footer>
       {% endblock %}
