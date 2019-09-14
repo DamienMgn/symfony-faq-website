@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AccountController!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+<h3 class="h3 mb-3 font-weight-normal">Modifier mes informations</h3>
+
+{{ form_start(registerForm, { 'attr' : { 'class': 'form-container' } }) }}
+<div class="my-custom-class-for-errors">
+    {{ form_errors(registerForm) }}
+</div>
+
+    {{ form_label(registerForm.username, null, {'label_attr': {'class': 'sr-only'}} ) }}
+        {{ form_widget(registerForm.username, { 'attr': { 'class' : 'form-control', 'placeholder': 'Username', 'autofocus': true}} ) }}
+
+    {{ form_label(registerForm.email, null, {'label_attr': {'class': 'sr-only'}} ) }}
+        {{ form_widget(registerForm.email, { 'attr': { 'class' : 'form-control', 'placeholder': 'Email'}} ) }}
+
+    {{ form_label(registerForm.password, null, {'label_attr': {'class': 'sr-only'}} ) }}
+        {{ form_widget(registerForm.password, { 'attr': { 'class' : 'form-control', 'placeholder': 'Password'}} ) }}
+
+
+    {{ form_widget(registerForm.register, { 'attr': { 'class' : 'btn btn-primary'}, 'label': 'Modifier'} ) }}
+
+{{ form_end(registerForm , { 'attr': { 'class' : 'btn btn-lg btn-primary'}}) }}
+
+</div>
+
+{% endblock %}

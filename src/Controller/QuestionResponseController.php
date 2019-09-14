@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\Question;
 use App\Entity\Response;
 use App\Form\QuestionType;

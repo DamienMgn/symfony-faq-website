@@ -24,7 +24,7 @@
             </p>
             {% if question.correctResponse.id is defined and question.correctResponse.id == response.id %}
             <span class="strong">Réponse validée</span>
-            {% elseif app.user.id == question.user.id %}
+            {% elseif app.user.id is defined and app.user.id == question.user.id %}
             <form method="POST" action="{{ path('select_response', {'question':question.id, 'response':response.id}) }}">
                 <button class="btn btn-lg btn-warning btn-correct-response" type="submit">
                     Valider

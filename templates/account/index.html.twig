@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AccountController!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+<h3 class="h3 mb-3 font-weight-normal">Mon compte</h3>
+    <div class="user-information">
+        <p><span>Username :</span> {{ user.userName }}</p>
+        <p><span>Email :</span> {{ user.email }}</p>
+        <p><a href="{{ path('account_update') }}">Modifier mes informations</a></p>
+        <p><a href="{{ path('account_questions') }}">Mes questions</a></p>
+        <p><a href="{{ path('account_responses') }}">Mes réponses</a></p>
+    </div>
+
+</div>
+
+{% endblock %}
