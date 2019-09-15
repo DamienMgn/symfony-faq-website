@@ -24,11 +24,21 @@ body {
 }
 
 .question-container {
-    width: 90%;
+    width: 100%;
+}
+
+.main-question-container {
+    width: 80%;
+}
+
+.main-tag-container {
+    width: 20%;
 }
 
 .tag-container {
-    width: 25%;
+    position: fixed;
+    width: 12em;
+    margin-left: 10px;
 }
 
 .navbar {
