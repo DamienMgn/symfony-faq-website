@@ -19,7 +19,11 @@ class QuestionResponseController extends AbstractController
     public function index()
     {   
 
-        $userRoles = $this->getUser()->getRoles();
+        if(!is_null($this->getUser())) {
+            $userRoles = $this->getUser()->getRoles();
+        } else {
+            $userRoles = [];
+        }
 
         if (in_array("ROLE_ADMIN", $userRoles)) {
             $questions = $this->getDoctrine()->getRepository(Question::class)->findAll();
@@ -47,7 +51,11 @@ class QuestionResponseController extends AbstractController
 
         $response = new Response();
 
-        $userRoles = $this->getUser()->getRoles();
+        if(!is_null($this->getUser())) {
+            $userRoles = $this->getUser()->getRoles();
+        } else {
+            $userRoles = [];
+        }
 
         if (in_array("ROLE_ADMIN", $userRoles)) {
             $responses = $this->getDoctrine()->getRepository(Response::class)->findBy(['question' => $question]);
