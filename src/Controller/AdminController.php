@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Question;
 use App\Entity\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 

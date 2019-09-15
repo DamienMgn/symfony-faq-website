@@ -8,7 +8,7 @@
 
     <div class="main-question-container">
 
-        <h3 class="h3 mb-3 font-weight-normal">Catgégories : {{ currentTag.name }}</h3>
+        <h3 class="h3 mb-3 font-weight-normal">Catégorie : {{ currentTag.name }}</h3>
     
         {% for question in currentTag.questions %}
 
@@ -32,10 +32,36 @@
             <div class="card-header card-post-user">
                 <p>Posé par <span class="strong"> {{ question.user.userName }}</span> le <span class="strong">{{ question.createdAt | date('Y-m-d') }}</span></p>
             {% if is_granted('ROLE_ADMIN') %}
-                <form method="POST" action="{{ path('moderate_question', {'question': question.id}) }}">
-                    <button class="btn btn-lg btn-danger btn-correct-response" type="submit">
-                        Modérer
-                    </button>
+                <form method="POST" action="{{ path('moderate_question', {'question': question.id }) }}">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        
+                        <button type="submit" class="btn 
+                        {% if question.isDisplay == false %}
+                        btn-danger
+                        {% else %}
+                        btn-secondary
+                        {% endif %}
+                        "
+                        {% if question.isDisplay == true %}
+                        disabled
+                        {% endif %}
+                        >On
+                        </button>
+
+                        <button type="submit" class="btn 
+                        {% if question.isDisplay == false %}
+                        btn-secondary
+                        {% else %}
+                        btn-danger
+                        {% endif %}
+                        "
+                        {% if question.isDisplay == false %}
+                        disabled
+                        {% endif %}
+                        >Off
+                        </button>
+
+                    </div>
                 </form>
             {% endif %}
             </div>
