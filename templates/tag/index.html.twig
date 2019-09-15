@@ -8,9 +8,9 @@
 
     <div class="question-container">
 
-        <h3 class="h3 mb-3 font-weight-normal">Bienvenue sur FaqOClock !!</h3>
+        <h3 class="h3 mb-3 font-weight-normal">Tags : {{ currentTag.name }}</h3>
     
-        {% for question in questions %}
+        {% for question in currentTag.questions %}
 
         <div class="card bg-light mb-3 question-container">
             <div class="card-header {% if app.user.id is defined and app.user.id == question.user.id %} bg-warning {% endif %} ">
@@ -48,7 +48,7 @@
     <section class="tag-container">
         <h3 class="h3 mb-3 font-weight-normal">Catégories</h3>
         <ul class="list-group list-tag">
-            {% for tag in allTags %}
+            {% for tag in tags %}
             <li class="list-group-item list-group-item-success">
                 <a href="{{ path('tag', { 'id': tag.id } ) }}">{{ tag.name }}</a>
             </li>

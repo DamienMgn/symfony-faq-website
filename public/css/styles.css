@@ -13,10 +13,21 @@ body {
 .container {
     min-height: calc(100vh - 250px);
     position: relative;
+    display: flex;
+    flex-direction: row;
     padding-top: 1em;
     z-index: 2;
     top: 59.5px;
 }
+
+.question-container {
+    width: 90%;
+}
+
+.tag-container {
+    width: 25%;
+}
+
 
 .navbar {
     position: fixed;
@@ -35,6 +46,11 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.list-group-item {
+    padding: 2px 4px;
+    margin-left: 10px;
 }
 
 .form-group .col-sm-10 {

@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Tag;
 use App\Entity\Question;
 use App\Entity\Response;
 use App\Form\QuestionType;
 use App\Form\ResponseType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -18,6 +18,8 @@ class QuestionResponseController extends AbstractController
      */
     public function index()
     {   
+        $tags = $this->getDoctrine()->getRepository(Tag::class)->findAll();
+
         $questions = $this->getDoctrine()->getRepository(Question::class)->findBy(
             ['isDisplay' => '0'],
             ['createdAt' => 'DESC']
@@ -25,6 +27,7 @@ class QuestionResponseController extends AbstractController
 
         return $this->render('question/index.html.twig', [
             'questions' => $questions,
+            'allTags' => $tags
         ]);
     }
 

@@ -11,6 +11,12 @@ App\Entity\Question:
         body: '<text()>'
         createdAt: '<date_create()>'
         user: '@user_*'
+        tags: ['@tag<numberBetween(1, 10)>']
+
+App\Entity\Tag:
+    tag{1..10}:
+        name: '<word()>'
+        createdAt: '<date_create()>'
   
 App\Entity\Response:
     response{1..150}:

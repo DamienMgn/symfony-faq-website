@@ -60,11 +60,17 @@ class Question
      */
     private $isDisplay;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="questions")
+     */
+    private $tags;
+
     public function __construct()
     {
         $this->responses = new ArrayCollection();
         $this->createdAt = new \DateTime();
         $this->isDisplay = '0';
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -183,6 +189,32 @@ class Question
     public function setIsDisplay($isDisplay): self
     {
         $this->isDisplay = $isDisplay;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        if ($this->tags->contains($tag)) {
+            $this->tags->removeElement($tag);
+        }
 
         return $this;
     }
