@@ -23,7 +23,7 @@ class Response
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Question", inversedBy="responses")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $question;
 
@@ -51,6 +51,7 @@ class Response
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->isDisplay = '0';
     }
 
     public function getId(): ?int

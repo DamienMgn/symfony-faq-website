@@ -64,6 +64,7 @@ class Question
     {
         $this->responses = new ArrayCollection();
         $this->createdAt = new \DateTime();
+        $this->isDisplay = '0';
     }
 
     public function getId(): ?int
