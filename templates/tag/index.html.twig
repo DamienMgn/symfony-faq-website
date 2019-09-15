@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div class="container">
+<div class="container flex-container-tag">
 
     <div class="question-container">
 
@@ -13,13 +13,13 @@
         {% for question in currentTag.questions %}
 
         <div class="card bg-light mb-3 question-container">
-            <div class="card-header {% if app.user.id is defined and app.user.id == question.user.id %} bg-warning {% endif %} ">
+            <div class="card-header {% if app.user.id is defined and app.user.id == question.user.id %} bg-secondary {% endif %} ">
                 <a href="{{ path('show_question', {'id':question.id}) }}">{{question.title}}</a>
             </div>
             <div class="card-body">
                 <p class="card-text">{{question.body}}</p>
             </div>
-            <div class="card-header">
+            <div class="card-header card-post-user">
                 <span>Catégories : </span>
                 <ul class="list-group list-group-horizontal">
                     {% for tag in question.tags %}
@@ -29,7 +29,7 @@
                     {% endfor %}
                 </ul>
             </div>
-            <div class="card-header">
+            <div class="card-header card-post-user">
                 <p>Posé par <span class="strong"> {{ question.user.userName }}</span> le <span class="strong">{{ question.createdAt | date('Y-m-d') }}</span></p>
             {% if is_granted('ROLE_ADMIN') %}
                 <form method="POST" action="{{ path('moderate_question', {'question': question.id}) }}">

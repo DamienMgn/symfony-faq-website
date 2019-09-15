@@ -10,7 +10,7 @@
 {% for question in questions %}
 
     <div class="card bg-light mb-3 question-container">
-        <div class="card-header bg-warning">
+        <div class="card-header bg-secondary">
             <a href="{{ path('show_question', {'id':question.id}) }}">{{question.title}}</a>
         </div>
         <div class="card-body">

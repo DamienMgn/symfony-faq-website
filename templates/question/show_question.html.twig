@@ -14,7 +14,7 @@
 
 {% for response in responses %}
 
-    <div class="card bg-{% if question.correctResponse.id is defined and question.correctResponse.id == response.id %}warning correct-response
+    <div class="card bg-{% if question.correctResponse.id is defined and question.correctResponse.id == response.id %}secondary correct-response
                         {% else %}light wrong-response
                         {% endif %}mb-3">
         <div class="card-header">

@@ -13,11 +13,14 @@ body {
 .container {
     min-height: calc(100vh - 250px);
     position: relative;
-    display: flex;
-    flex-direction: row;
     padding-top: 1em;
     z-index: 2;
     top: 59.5px;
+}
+
+.flex-container-tag {
+    display: flex;
+    flex-direction: row;
 }
 
 .question-container {
@@ -27,7 +30,6 @@ body {
 .tag-container {
     width: 25%;
 }
-
 
 .navbar {
     position: fixed;
@@ -49,7 +51,7 @@ body {
 }
 
 .list-group-item {
-    padding: 2px 4px;
+    padding: 1px 4px;
     margin-left: 10px;
 }
 
@@ -65,6 +67,10 @@ body {
 .card-header p {
     margin: 0;
     width: 85%
+}
+
+.card-post-user {
+    padding:2px 20px;
 }
 
 .btn-correct-response {
