@@ -18,7 +18,15 @@ class AdminController extends AbstractController
 
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-            $question->setIsDisplay('1');
+            $questionIsDisplay = $question->getIsDisplay();
+
+            if ($questionIsDisplay) {
+                $question->setIsDisplay('0');
+            } else {
+                $question->setIsDisplay('1');
+            }
+
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($question);
     
@@ -37,7 +45,14 @@ class AdminController extends AbstractController
 
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-            $response->setIsDisplay('1');
+            $responseIsDisplay = $response->getIsDisplay();
+
+            if ($responseIsDisplay) {
+                $response->setIsDisplay('0');
+            } else {
+                $response->setIsDisplay('1');
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($response);
     

@@ -69,7 +69,7 @@ class Question
     {
         $this->responses = new ArrayCollection();
         $this->createdAt = new \DateTime();
-        $this->isDisplay = '0';
+        $this->isDisplay = '1';
         $this->tags = new ArrayCollection();
     }
 

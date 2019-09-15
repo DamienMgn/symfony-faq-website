@@ -18,12 +18,19 @@ class QuestionResponseController extends AbstractController
      */
     public function index()
     {   
-        $tags = $this->getDoctrine()->getRepository(Tag::class)->findAll();
 
-        $questions = $this->getDoctrine()->getRepository(Question::class)->findBy(
-            ['isDisplay' => '0'],
-            ['createdAt' => 'DESC']
-        );
+        $userRoles = $this->getUser()->getRoles();
+
+        if (in_array("ROLE_ADMIN", $userRoles)) {
+            $questions = $this->getDoctrine()->getRepository(Question::class)->findAll();
+        } else {
+            $questions = $this->getDoctrine()->getRepository(Question::class)->findBy(
+                ['isDisplay' => '1'],
+                ['createdAt' => 'ASC']
+            );
+        }
+        
+        $tags = $this->getDoctrine()->getRepository(Tag::class)->findAll();
 
         return $this->render('question/index.html.twig', [
             'questions' => $questions,
@@ -40,9 +47,15 @@ class QuestionResponseController extends AbstractController
 
         $response = new Response();
 
-        $form = $this->createForm(ResponseType::class, $response);
+        $userRoles = $this->getUser()->getRoles();
 
-        $responses = $this->getDoctrine()->getRepository(Response::class)->findByResponsesDisplay('0', $question);
+        if (in_array("ROLE_ADMIN", $userRoles)) {
+            $responses = $this->getDoctrine()->getRepository(Response::class)->findBy(['question' => $question]);
+        } else {
+            $responses = $this->getDoctrine()->getRepository(Response::class)->findByResponsesDisplay('1', $question);
+        }
+
+        $form = $this->createForm(ResponseType::class, $response);
 
         $form->handleRequest($request);
 

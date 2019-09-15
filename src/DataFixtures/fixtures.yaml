@@ -22,5 +22,5 @@ App\Entity\Response:
     response{1..150}:
         body: '<text()>'
         createdAt: '<date_create()>'
-        question: '@question_*'
+        question: ['@question<numberBetween(1, 15)>']
         user: '@user_*'

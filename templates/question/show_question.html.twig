@@ -9,6 +9,11 @@
         <span class="strong">{{ question.user.userName }}</span> le
         <span class="strong">{{ question.createdAt | date('Y-m-d') }}</span>
     </p>
+    <ul class="list-group list-group-horizontal">
+    {% for tag in question.tags %}
+        <li class="list-group-item list-group-item-success">{{ tag.name }}</li>
+    {% endfor %}
+    </ul>
     <p>{{ question.body }}</p>
     <div class="responses-container">
 
@@ -31,13 +36,43 @@
                 </button>
             </form>
             {% endif %}
+
             {% if is_granted('ROLE_ADMIN') %}
+
             <form method="POST" action="{{ path('moderate_response', {'response': response.id}) }}">
-                <button class="btn btn-lg btn-danger btn-correct-response" type="submit">
-                    Modérer
-                </button>
-            </form>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        
+                        <button type="submit" class="btn 
+                        {% if response.isDisplay == false %}
+                        btn-danger
+                        {% else %}
+                        btn-secondary
+                        {% endif %}
+                        "
+                        {% if response.isDisplay == true %}
+                        disabled
+                        {% endif %}
+                        >On
+                        </button>
+
+                        <button type="submit" class="btn 
+                        {% if response.isDisplay == false %}
+                        btn-secondary
+                        {% else %}
+                        btn-danger
+                        {% endif %}
+                        "
+                        {% if response.isDisplay == false %}
+                        disabled
+                        {% endif %}
+                        >Off
+                        </button>
+
+                    </div>
+                </form>
+
             {% endif %}
+
         </div>
         <div class="card-body">
             <p class="card-text">{{ response.body }}</p>

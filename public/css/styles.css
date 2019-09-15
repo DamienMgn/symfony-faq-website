@@ -41,6 +41,10 @@ body {
     margin-left: 10px;
 }
 
+.tag-container .list-group-item {
+    height: 2em
+}
+
 .navbar {
     position: fixed;
     top: 0;
@@ -85,6 +89,16 @@ body {
 
 .btn-correct-response {
     padding: 3px 7px 3px 7px;
+}
+
+.btn-secondary {
+    padding: 1px 5px;
+    width: 4em;
+}
+
+.btn-danger {
+    padding: 1px 5px;
+    width: 4em;
 }
 
 .strong {
