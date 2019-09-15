@@ -18,9 +18,11 @@
         {{ form_label(registerForm.email, null, {'label_attr': {'class': 'sr-only'}} ) }}
             {{ form_widget(registerForm.email, { 'attr': { 'class' : 'form-control', 'placeholder': 'Email'}} ) }}
 
-        {{ form_label(registerForm.password, null, {'label_attr': {'class': 'sr-only'}} ) }}
-            {{ form_widget(registerForm.password, { 'attr': { 'class' : 'form-control', 'placeholder': 'Password'}} ) }}
+        {{ form_label(registerForm.password.first, null, {'label_attr': {'class': 'sr-only'}} ) }}
+            {{ form_widget(registerForm.password.first, { 'attr': { 'class' : 'form-control', 'placeholder': 'Password'}} ) }}
 
+        {{ form_label(registerForm.password.second, null, {'label_attr': {'class': 'sr-only'}} ) }}
+            {{ form_widget(registerForm.password.second, { 'attr': { 'class' : 'form-control', 'placeholder': 'Retaper password'}} ) }}
  
         {{ form_widget(registerForm.register, { 'attr': { 'class' : 'btn btn-primary'}} ) }}
 
