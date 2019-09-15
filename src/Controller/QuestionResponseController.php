@@ -45,10 +45,12 @@ class QuestionResponseController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
             $response = $form->getData();
             $response->setQuestion($question);
 
-            $user = $question->getUser();
+            $user = $this->getUser();
             $response->setUser($user);
     
             $entityManager = $this->getDoctrine()->getManager();
@@ -68,8 +70,10 @@ class QuestionResponseController extends AbstractController
     /**
      * @Route("/question/add", name="add_question")
      */
-    public function addQuestion(Request $request, Security $security)
+    public function addQuestion(Request $request)
     {   
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $question = new Question();
 
         $form = $this->createForm(QuestionType::class, $question);
@@ -80,7 +84,7 @@ class QuestionResponseController extends AbstractController
 
             $question = $form->getData();
 
-            $user = $security->getUser();
+            $user = $this->getUser();
             $question->setUser($user);
     
             $entityManager = $this->getDoctrine()->getManager();
@@ -98,10 +102,11 @@ class QuestionResponseController extends AbstractController
     /**
      * @Route("/question/select_response/{response}/{question}", methods={"POST"}, name="select_response")
      */
-    public function selectResponse(Security $security, Question $question, Response $response)
+    public function selectResponse(Question $question, Response $response)
     {   
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $userSecurity = $security->getUser()->getId();
+        $userSecurity = $this->getUser()->getId();
         $userQuestion = $question->getUser()->getId();
 
         if ($userSecurity === $userQuestion) {

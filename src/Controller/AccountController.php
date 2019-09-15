@@ -7,7 +7,6 @@ use App\Entity\Question;
 use App\Entity\Response;
 use App\Form\RegisterUserType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -17,9 +16,12 @@ class AccountController extends AbstractController
     /**
      * @Route("/account", name="account")
      */
-    public function index(Security $security)
+    public function index()
     {
-        $userId = $security->getUser()->getId();
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $userId = $this->getUser()->getId();
         $userInformations = $this->getDoctrine()->getRepository(User::class)->find($userId);
 
         return $this->render('account/index.html.twig', [
@@ -30,9 +32,11 @@ class AccountController extends AbstractController
     /**
      * @Route("/account/update", name="account_update")
      */
-    public function addQuestion(Request $request, Security $security, UserPasswordEncoderInterface $encoder)
+    public function addQuestion(Request $request, UserPasswordEncoderInterface $encoder)
     {   
-        $user = $security->getUser();
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
 
         $form = $this->createForm(RegisterUserType::class, $user);
 
@@ -61,10 +65,10 @@ class AccountController extends AbstractController
     /**
      * @Route("/account/questions", name="account_questions")
      */
-    public function userQuestions(Security $security)
+    public function userQuestions()
     {   
-
-        $user = $security->getUser();
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         
         $questions = $this->getDoctrine()->getRepository(Question::class)->findBy(['user' => $user]);
 
@@ -77,10 +81,10 @@ class AccountController extends AbstractController
     /**
      * @Route("/account/responses", name="account_responses")
      */
-    public function userResponses(Security $security)
+    public function userResponses()
     {   
-
-        $user = $security->getUser();
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         
         $responses = $this->getDoctrine()->getRepository(Response::class)->findBy(['user' => $user]);
 
