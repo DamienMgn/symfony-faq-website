@@ -41,6 +41,7 @@ class Tag
     public function __construct()
     {
         $this->questions = new ArrayCollection();
+        $this->createdAt = new \DateTime(); 
     }
 
     public function __toString()

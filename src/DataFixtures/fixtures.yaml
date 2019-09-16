@@ -7,8 +7,8 @@ App\Entity\User:
 
 App\Entity\Question:
     question_{1..15}:
-        title: '<word()>'
-        body: '<text()>'
+        title: '<text(120)>'
+        body: '<text(500)>'
         createdAt: '<date_create()>'
         user: '@user_*'
         tags: ['@tag<numberBetween(1, 10)>']
@@ -20,7 +20,7 @@ App\Entity\Tag:
   
 App\Entity\Response:
     response{1..150}:
-        body: '<text()>'
+        body: '<text(500)>'
         createdAt: '<date_create()>'
-        question: ['@question<numberBetween(1, 15)>']
+        question: '@question_*'
         user: '@user_*'
