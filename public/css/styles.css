@@ -191,6 +191,10 @@ h3 {
     margin-top:0.5em;
 }
 
+.question-title {
+    color: white;
+}
+
 @media (max-width: 900px) {
     .flex-container-tag {
       flex-direction: column-reverse;

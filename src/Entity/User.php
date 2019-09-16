@@ -56,6 +56,11 @@ class User implements UserInterface
         $this->responses = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->userName;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

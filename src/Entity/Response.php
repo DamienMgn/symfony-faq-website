@@ -54,6 +54,11 @@ class Response
         $this->isDisplay = '1';
     }
 
+    public function __toString()
+    {
+        return $this->body;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

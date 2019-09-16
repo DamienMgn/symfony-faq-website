@@ -12,74 +12,13 @@
     
         {% for question in questions %}
 
-        <div class="card bg-dark mb-3 question-container">
-            <div class="card-header {% if app.user.id is defined and app.user.id == question.user.id %} bg-secondary {% endif %} ">
-                <a href="{{ path('show_question', {'id':question.id}) }}">{{question.title}}</a>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{question.body}}</p>
-            </div>
-            <div class="card-header card-post-user">
-                    {% for tag in question.tags %}
-                            <a href="{{ path('tag', { 'id': tag.id } ) }}">
-                                <span class="badge badge-primary">{{tag.name}}</span>
-                            </a>
-                    {% endfor %}
-            </div>
-            <div class="card-header card-post-user">
-                <p>Posé par <span class="strong"> {{ question.user.userName }}</span> le <span class="strong">{{ question.createdAt | date('Y-m-d') }}</span></p>
-            {% if is_granted('ROLE_ADMIN') %}
-                <form method="POST" action="{{ path('moderate_question', {'question': question.id}) }}">
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        
-                        <button type="submit" class="btn 
-                        {% if question.isDisplay == false %}
-                        btn-danger
-                        {% else %}
-                        btn-secondary
-                        {% endif %}
-                        "
-                        {% if question.isDisplay == true %}
-                        disabled
-                        {% endif %}
-                        >On
-                        </button>
-
-                        <button type="submit" class="btn 
-                        {% if question.isDisplay == false %}
-                        btn-secondary
-                        {% else %}
-                        btn-danger
-                        {% endif %}
-                        "
-                        {% if question.isDisplay == false %}
-                        disabled
-                        {% endif %}
-                        >Off
-                        </button>
-
-                    </div>
-                </form>
-            {% endif %}
-            </div>
-        </div>
+        {% include './questions_list.html.twig' %}
 
         {% endfor %}
 
     </div>
     
-    <div class="main-tag-container">
-    <section class="tag-container">
-        <h3 class="h3 mb-3 font-weight-normal">Catégories</h3>
-        <div class="badge-container">
-            {% for tag in allTags %}
-            <a href="{{ path('tag', { 'id': tag.id } ) }}">
-                <span class="badge badge-primary badge-question">{{tag.name}}</span>
-            </a>
-            {% endfor %}
-        </div>
-    </section>
-    </div>
+    {% include './tags_list.html.twig' %}
 
 </div>
 

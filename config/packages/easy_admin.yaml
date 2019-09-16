@@ -1,0 +1,20 @@
+easy_admin:
+    site_name: 'FaqOClock'
+    user:
+        display_name: true
+    entities:
+        Tag:
+            class: App\Entity\Tag
+            list:
+                fields: ['id', 'name']
+        User:
+            class: App\Entity\User
+            list:
+                fields: ['id', 'userName', 'email', 'roles']
+            form:
+                fields:
+                    - email
+                    - userName
+                    - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }
+        Question:
+            class: App\Entity\Question
