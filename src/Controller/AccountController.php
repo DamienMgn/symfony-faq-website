@@ -53,6 +53,11 @@ class AccountController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $this->addFlash(
+                'notice',
+                'Votre profil a été mis à jour !'
+            );
     
             return $this->redirectToRoute('account');
         }

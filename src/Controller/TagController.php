@@ -13,13 +13,24 @@ class TagController extends AbstractController
      */
     public function index(Tag $tag)
     {
+
+        if(!is_null($this->getUser())) {
+            $userRoles = $this->getUser()->getRoles();
+        } else {
+            $userRoles = [];
+        }
+
+        if (in_array("ROLE_ADMIN", $userRoles)) {
+            $this->getDoctrine()->getRepository(Tag::class)->find($tag);
+        } else {
+            $this->getDoctrine()->getRepository(Tag::class)->findTagJoinQuestion('1', $tag);
+        }
+
         $tags = $this->getDoctrine()->getRepository(Tag::class)->findAll();
 
-        $currentTag = $this->getDoctrine()->getRepository(Tag::class)->find($tag);
-
         return $this->render('tag/index.html.twig', [
-            'allTags' => $tags,
-            'currentTag' => $currentTag
+            'currentTag' => $tag,
+            'allTags' => $tags
         ]);
     }
 }

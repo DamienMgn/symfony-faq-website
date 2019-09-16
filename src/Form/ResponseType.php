@@ -14,7 +14,9 @@ class ResponseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('body', TextareaType::class)
+            ->add('body', TextareaType::class, [
+                'required' => true
+            ])
             ->add('save', SubmitType::class)
         ;
     }

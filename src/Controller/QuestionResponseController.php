@@ -26,11 +26,11 @@ class QuestionResponseController extends AbstractController
         }
 
         if (in_array("ROLE_ADMIN", $userRoles)) {
-            $questions = $this->getDoctrine()->getRepository(Question::class)->findAll();
+            $questions = $this->getDoctrine()->getRepository(Question::class)->findAllQuestionJoinTags();
         } else {
             $questions = $this->getDoctrine()->getRepository(Question::class)->findBy(
                 ['isDisplay' => '1'],
-                ['createdAt' => 'ASC']
+                ['createdAt' => 'DESC']
             );
         }
         
@@ -58,7 +58,10 @@ class QuestionResponseController extends AbstractController
         }
 
         if (in_array("ROLE_ADMIN", $userRoles)) {
-            $responses = $this->getDoctrine()->getRepository(Response::class)->findBy(['question' => $question]);
+            $responses = $this->getDoctrine()->getRepository(Response::class)->findBy(
+                ['question' => $question],
+                ['createdAt' => 'ASC']
+            );
         } else {
             $responses = $this->getDoctrine()->getRepository(Response::class)->findByResponsesDisplay('1', $question);
         }

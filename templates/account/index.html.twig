@@ -6,6 +6,13 @@
 
 <div class="container">
 
+    {% for message in app.flashes('notice') %}
+    <div class="alert alert-dismissible alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <p>{{message}}</p>
+    </div>
+    {% endfor %}
+
 <h3 class="h3 mb-3 font-weight-normal">Mon compte</h3>
     <div class="user-information">
         <p><span>Username :</span> {{ user.userName }}</p>

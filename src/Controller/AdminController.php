@@ -26,7 +26,6 @@ class AdminController extends AbstractController
                 $question->setIsDisplay('1');
             }
 
-            
             $em = $this->getDoctrine()->getManager();
             $em->persist($question);
     

@@ -7,6 +7,9 @@ easy_admin:
             class: App\Entity\Tag
             list:
                 fields: ['id', 'name']
+            form:
+                fields:
+                    - name
         User:
             class: App\Entity\User
             list:
@@ -18,3 +21,11 @@ easy_admin:
                     - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }
         Question:
             class: App\Entity\Question
+            list:
+                fields: ['id', 'title', 'isDisplay', 'responses']
+            form:
+                fields:
+                    - title
+                    - body
+                    - isDisplay
+                    - tags

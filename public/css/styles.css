@@ -68,6 +68,10 @@ body {
     align-items: center;
 }
 
+select.form-control[multiple] {
+    height: 10em;
+}
+
 .list-group-item {
     padding: 1px 4px;
     margin-left: 10px;
