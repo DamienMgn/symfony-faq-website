@@ -5,24 +5,22 @@
 <div class="container">
 
     <h3 class="h3 mb-3 font-weight-normal">{{ question.title }}</h3>
-    <p>Question posé par 
+    <p class="question-user-info">Question posé par 
         <span class="strong">{{ question.user.userName }}</span> le
         <span class="strong">{{ question.createdAt | date('Y-m-d') }}</span>
     </p>
-    <ul class="list-group list-group-horizontal">
     {% for tag in question.tags %}
-        <li class="list-group-item list-group-item-success">
-            <a href="{{ path('tag', { 'id': tag.id } ) }}">{{ tag.name }}</a>
-        </li>
+        <a href="{{ path('tag', { 'id': tag.id } ) }}">
+            <span class="badge badge-primary badge-question">{{tag.name}}</span>
+        </a>
     {% endfor %}
-    </ul>
-    <p>{{ question.body }}</p>
+    <p class="show-question">{{ question.body }}</p>
     <div class="responses-container">
 
 {% for response in responses %}
 
-    <div class="card bg-{% if question.correctResponse.id is defined and question.correctResponse.id == response.id %}secondary correct-response
-                        {% else %}light wrong-response
+    <div class="card bg-{% if question.correctResponse.id is defined and question.correctResponse.id == response.id %}light text-black correct-response
+                        {% else %}dark wrong-response
                         {% endif %}mb-3">
         <div class="card-header">
             <p>Réponse le 
@@ -30,10 +28,10 @@
                 <span class="strong">{{ response.user.userName }}</span>
             </p>
             {% if question.correctResponse.id is defined and question.correctResponse.id == response.id %}
-            <span class="strong">Réponse validée</span>
+            <span class="strong validated">Validée</span>
             {% elseif app.user.id is defined and app.user.id == question.user.id %}
             <form method="POST" action="{{ path('select_response', {'question':question.id, 'response':response.id}) }}">
-                <button class="btn btn-lg btn-warning btn-correct-response" type="submit">
+                <button class="btn btn-warning btn-correct-response" type="submit">
                     Valider
                 </button>
             </form>

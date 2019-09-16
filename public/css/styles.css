@@ -88,7 +88,38 @@ body {
 }
 
 .btn-correct-response {
-    padding: 3px 7px 3px 7px;
+    padding: 1px 5px;
+    width: 4em;
+}
+
+.validated {
+    margin-right: 1em;
+}
+
+.text-black {
+    color: black;
+}
+
+.badge {
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+}
+
+.badge-question {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.question-user-info {
+    border-bottom: 3px solid #4D5D6C;
+    padding: 0em 1em 1em 1em;
+    margin-bottom: 0;
+}
+
+.show-question {
+    font-size: 1em;
+    padding: 1em;
+    border-top: 3px solid #4D5D6C
 }
 
 .btn-secondary {
@@ -120,13 +151,22 @@ body {
 }
 
 .footer {
-    background-color: #38B875;
+    background-color: #4D5D6C;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 10em;
     width: 100vw;
     margin-top: 3em;
+}
+
+.breadcrumb {
+    padding: 1px 5px;
+    margin: 0;
+}
+
+.breadcrumb-item {
+    padding: 0px 3px;
 }
 
 .footer-app {

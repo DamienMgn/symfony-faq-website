@@ -5,11 +5,9 @@
 <div class="container">
 <h3 class="h3 mb-3 font-weight-normal">Mes réponses</h3>
 
-
-
 {% for response in responses %}
 
-    <div class="card bg-light wrong-responsemb-3">
+    <div class="card bg-dark wrong-responsemb-3">
         <div class="card-header">
             <p>Réponse le 
                 <span class="strong">{{ response.createdAt | date('Y-m-d') }}</span> par

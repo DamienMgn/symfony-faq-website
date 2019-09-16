@@ -12,7 +12,7 @@
     
         {% for question in questions %}
 
-        <div class="card bg-light mb-3 question-container">
+        <div class="card bg-dark mb-3 question-container">
             <div class="card-header {% if app.user.id is defined and app.user.id == question.user.id %} bg-secondary {% endif %} ">
                 <a href="{{ path('show_question', {'id':question.id}) }}">{{question.title}}</a>
             </div>
@@ -20,14 +20,11 @@
                 <p class="card-text">{{question.body}}</p>
             </div>
             <div class="card-header card-post-user">
-                <span>Catégories : </span>
-                <ul class="list-group list-group-horizontal">
                     {% for tag in question.tags %}
-                    <li class="list-group-item list-group-item-success">
-                        <a href="{{ path('tag', { 'id': tag.id } ) }}">{{tag.name}}</a>
-                    </li>
+                            <a href="{{ path('tag', { 'id': tag.id } ) }}">
+                                <span class="badge badge-primary">{{tag.name}}</span>
+                            </a>
                     {% endfor %}
-                </ul>
             </div>
             <div class="card-header card-post-user">
                 <p>Posé par <span class="strong"> {{ question.user.userName }}</span> le <span class="strong">{{ question.createdAt | date('Y-m-d') }}</span></p>
@@ -76,7 +73,7 @@
         <h3 class="h3 mb-3 font-weight-normal">Catégories</h3>
         <ul class="list-group list-tag">
             {% for tag in allTags %}
-            <li class="list-group-item list-group-item-success">
+            <li class="list-group-item list-group-item-dark">
                 <a href="{{ path('tag', { 'id': tag.id } ) }}">{{ tag.name }}</a>
             </li>
             {% endfor %}
