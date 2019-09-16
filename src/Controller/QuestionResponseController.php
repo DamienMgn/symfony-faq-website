@@ -80,6 +80,11 @@ class QuestionResponseController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($response);
             $entityManager->flush();
+
+            $this->addFlash(
+                'notice',
+                'Votre réponse a été ajoutée !'
+            );
     
             return $this->redirectToRoute('show_question', ['id' => $question->getId()]);
         }
@@ -114,6 +119,11 @@ class QuestionResponseController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($question);
             $entityManager->flush();
+
+            $this->addFlash(
+                'notice',
+                'Votre question a été ajoutée !'
+            );
     
             return $this->redirectToRoute('show_question', ['id' => $question->getId()]);
         }
