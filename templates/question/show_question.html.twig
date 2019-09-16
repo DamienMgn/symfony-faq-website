@@ -26,8 +26,8 @@
 
 {% for response in responses %}
 
-    <div class="card bg-{% if question.correctResponse.id is defined and question.correctResponse.id == response.id %}light text-black correct-response
-                        {% else %}dark wrong-response
+    <div class="card bg-{% if question.correctResponse.id is defined and question.correctResponse.id == response.id %}dark text-black correct-response
+                        {% else %}secondary wrong-response
                         {% endif %}mb-3">
         <div class="card-header">
             <p>Réponse le 

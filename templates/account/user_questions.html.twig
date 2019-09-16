@@ -9,7 +9,7 @@
 
 {% for question in questions %}
 
-    <div class="card bg-dark mb-3 question-container">
+    <div class="card bg-secondary mb-3 question-container">
         <div class="card-header">
             <a class="strong" href="{{ path('show_question', {'id':question.id}) }}">{{question.title}}</a>
         </div>
