@@ -110,6 +110,12 @@ body {
     margin-bottom: 0.5em;
 }
 
+.badge-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
 .question-user-info {
     border-bottom: 3px solid #4D5D6C;
     padding: 0em 1em 1em 1em;
