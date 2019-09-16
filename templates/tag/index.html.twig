@@ -71,11 +71,13 @@
     <div class="main-tag-container">
     <section class="tag-container">
         <h3 class="h3 mb-3 font-weight-normal">Catégories</h3>
+        <div class="badge-container">
             {% for tag in tags %}
             <a href="{{ path('tag', { 'id': tag.id } ) }}">
                 <span class="badge badge-primary badge-question">{{tag.name}}</span>
             </a>
             {% endfor %}
+        </div>
     </section>
     </div>
 

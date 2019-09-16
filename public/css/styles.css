@@ -52,6 +52,10 @@ body {
     z-index: 3;
 }
 
+.form-search {
+    margin-right: 1em;
+}
+
 .form-group {
     display: flex;
     justify-content: center;
@@ -182,3 +186,27 @@ body {
     left: 0;
     right: 0
 }
+
+h3 {
+    margin-top:0.5em;
+}
+
+@media (max-width: 900px) {
+    .flex-container-tag {
+      flex-direction: column-reverse;
+    }
+
+    .main-question-container {
+        width: 100%;
+    }
+    
+    .main-tag-container {
+        width: 100%;
+    }
+    
+    .tag-container {
+        position: relative;
+        width: 100%;
+        margin: 0;
+    }
+  }

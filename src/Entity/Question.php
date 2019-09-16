@@ -30,7 +30,7 @@ class Question
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Response", mappedBy="question", orphanRemoval=true)
-     * @ORM\OrderBy({"createdAt" = "ASC"})
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $responses;
 
