@@ -199,7 +199,7 @@ h3 {
     color: white;
 }
 
-@media (max-width: 900px) {
+@media only screen and (max-width: 900px) {
     .flex-container-tag {
       flex-direction: column-reverse;
     }
