@@ -15,7 +15,9 @@
 
     <div class="main-question-container">
 
-        <h3 class="h3 mb-3 font-weight-normal">Bienvenue sur FaqOClock !!</h3>
+        <h3 class="h3 mb-3 font-weight-normal">
+            Bienvenue {% if app.user.id is defined %} {{ app.user.userName }} {% endif %}!
+        </h3>
     
         {% for question in questions %}
 
