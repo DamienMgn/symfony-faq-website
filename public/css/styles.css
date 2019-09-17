@@ -131,9 +131,11 @@ select.form-control[multiple] {
 }
 
 .show-question {
-    font-size: 1em;
+    font-size: 1.1em;
     padding: 1em;
-    border-top: 3px solid #4D5D6C
+    border-top: 3px solid #4D5D6C;
+    border-bottom: 3px solid #4D5D6C;
+
 }
 
 .btn-secondary {

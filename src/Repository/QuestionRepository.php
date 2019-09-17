@@ -34,16 +34,13 @@ class QuestionRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
     
-
-    /*
-    public function findOneBySomeField($value): ?Question
+    public function findByString($value)
     {
-        return $this->createQueryBuilder('q')
-            ->andWhere('q.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
+        $qb = $this->createQueryBuilder('q')
+            ->andWhere('q.title LIKE :val')
+            ->setParameter('val' , '%'.$value.'%')
         ;
+
+        return $qb->getQuery()->getResult();
     }
-    */
 }

@@ -157,4 +157,22 @@ class QuestionResponseController extends AbstractController
 
         return $this->redirectToRoute('show_question', ['id' => $question->getId()]);
     }
+    
+    /**
+     * @Route("/question/search/", name="select_response")
+     */
+    public function searchResponse(Request $request)
+    {   
+        $search = $request->query->get('search-input');
+
+        $questions = $this->getDoctrine()->getRepository(Question::class)->findByString($search);
+
+        $tags = $this->getDoctrine()->getRepository(Tag::class)->findAll();
+
+        return $this->render('question/index.html.twig', [
+            'questions' => $questions,
+            'allTags' => $tags
+        ]);
+
+    }
 }
