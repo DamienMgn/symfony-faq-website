@@ -53,6 +53,16 @@ class QuestionResponseController extends AbstractController
     {   
         $question = $this->getDoctrine()->getRepository(Question::class)->find($question);
 
+        if(!is_null($this->getUser())) {
+            $userRoles = $this->getUser()->getRoles();
+        } else {
+            $userRoles = [];
+        }
+
+        if (!$question->getIsDisplay() && count($userRoles) <= 1) {
+            return $this->render('question/forbidden.html.twig');
+        }
+
         $response = new Response();
 
         if(!is_null($this->getUser())) {
