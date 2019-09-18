@@ -50,6 +50,7 @@ class QuestionRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('q')
             ->Where('q.title LIKE :val')
             ->setParameter('val' , '%'.$value.'%')
+            ->orderBy('q.createdAt', 'DESC')
         ;
 
         return $qb->getQuery();
@@ -62,6 +63,7 @@ class QuestionRepository extends ServiceEntityRepository
             ->setParameter('test' , '1')
             ->andWhere('q.title LIKE :val')
             ->setParameter('val' , '%'.$value.'%')
+            ->orderBy('q.createdAt', 'DESC')
         ;
 
         return $qb->getQuery();

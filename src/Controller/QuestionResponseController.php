@@ -173,7 +173,7 @@ class QuestionResponseController extends AbstractController
     }
     
     /**
-     * @Route("/question/search/", name="search_response")
+     * @Route("/question/search/", name="search_question")
      */
     public function searchResponse(Request $request, PaginatorInterface $paginator)
     {   
