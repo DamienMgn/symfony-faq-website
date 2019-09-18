@@ -31,16 +31,39 @@ class QuestionRepository extends ServiceEntityRepository
         ->orderBy('q.createdAt', 'DESC')
         ;
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery();
+    }
+
+    public function findAllQuestions()
+    {
+        $qb = $this->createQueryBuilder('q')
+        ->where('q.isDisplay = :val')
+        ->setParameter('val' , '1')
+        ->orderBy('q.createdAt', 'DESC')
+        ;
+
+        return $qb->getQuery();
     }
     
     public function findByString($value)
     {
         $qb = $this->createQueryBuilder('q')
+            ->Where('q.title LIKE :val')
+            ->setParameter('val' , '%'.$value.'%')
+        ;
+
+        return $qb->getQuery();
+    }
+
+    public function findByStringOnlyValidateQuestion($value)
+    {
+        $qb = $this->createQueryBuilder('q')
+            ->where('q.isDisplay = :test')
+            ->setParameter('test' , '1')
             ->andWhere('q.title LIKE :val')
             ->setParameter('val' , '%'.$value.'%')
         ;
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery();
     }
 }

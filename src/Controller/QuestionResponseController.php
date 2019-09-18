@@ -7,6 +7,7 @@ use App\Entity\Question;
 use App\Entity\Response;
 use App\Form\QuestionType;
 use App\Form\ResponseType;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +17,7 @@ class QuestionResponseController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index()
+    public function index(Request $request, PaginatorInterface $paginator)
     {   
 
         if(!is_null($this->getUser())) {
@@ -26,18 +27,21 @@ class QuestionResponseController extends AbstractController
         }
 
         if (in_array("ROLE_ADMIN", $userRoles)) {
-            $questions = $this->getDoctrine()->getRepository(Question::class)->findAllQuestionJoinTags();
+            $query = $this->getDoctrine()->getRepository(Question::class)->findAllQuestionJoinTags();
         } else {
-            $questions = $this->getDoctrine()->getRepository(Question::class)->findBy(
-                ['isDisplay' => '1'],
-                ['createdAt' => 'DESC']
-            );
+            $query = $this->getDoctrine()->getRepository(Question::class)->findAllQuestions();
         }
+
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            7 /*limit per page*/
+        );
         
         $tags = $this->getDoctrine()->getRepository(Tag::class)->findAll();
 
         return $this->render('question/index.html.twig', [
-            'questions' => $questions,
+            'questions' => $pagination,
             'allTags' => $tags
         ]);
     }
@@ -159,18 +163,34 @@ class QuestionResponseController extends AbstractController
     }
     
     /**
-     * @Route("/question/search/", name="select_response")
+     * @Route("/question/search/", name="search_response")
      */
-    public function searchResponse(Request $request)
+    public function searchResponse(Request $request, PaginatorInterface $paginator)
     {   
         $search = $request->query->get('search-input');
 
-        $questions = $this->getDoctrine()->getRepository(Question::class)->findByString($search);
+        if(!is_null($this->getUser())) {
+            $userRoles = $this->getUser()->getRoles();
+        } else {
+            $userRoles = [];
+        }
+
+        if (in_array("ROLE_ADMIN", $userRoles)) {
+            $query = $this->getDoctrine()->getRepository(Question::class)->findByString($search);
+        } else {
+            $query = $this->getDoctrine()->getRepository(Question::class)->findByStringOnlyValidateQuestion($search);
+        }
+
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            7 /*limit per page*/
+        );
 
         $tags = $this->getDoctrine()->getRepository(Tag::class)->findAll();
 
         return $this->render('question/index.html.twig', [
-            'questions' => $questions,
+            'questions' => $pagination,
             'allTags' => $tags
         ]);
 

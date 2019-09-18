@@ -25,6 +25,10 @@
 
         {% endfor %}
 
+        <div class="navigation">
+            {{ knp_pagination_render(questions) }}
+        </div>
+
     </div>
     
     {% include './tags_list.html.twig' %}
