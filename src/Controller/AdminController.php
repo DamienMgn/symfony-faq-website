@@ -15,21 +15,12 @@ class AdminController extends AbstractController
      */
     public function moderateQuestion(Question $question)
     {   
+        $questionIsDisplay = $question->getIsDisplay() ? $question->setIsDisplay('0') : $question->setIsDisplay('1');
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($question);
 
-            $questionIsDisplay = $question->getIsDisplay();
-
-            if ($questionIsDisplay) {
-                $question->setIsDisplay('0');
-            } else {
-                $question->setIsDisplay('1');
-            }
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($question);
-    
-            $em->flush();
+        $em->flush();
 
         return $this->redirectToRoute('index');
     }
@@ -42,20 +33,12 @@ class AdminController extends AbstractController
 
         $questionId = $response->getQuestion()->getId();
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $responseIsDisplay = $response->getIsDisplay() ? $response->setIsDisplay('0') : $response->setIsDisplay('1');
 
-            $responseIsDisplay = $response->getIsDisplay();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($response);
 
-            if ($responseIsDisplay) {
-                $response->setIsDisplay('0');
-            } else {
-                $response->setIsDisplay('1');
-            }
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($response);
-    
-            $em->flush();
+        $em->flush();
 
         return $this->redirectToRoute('show_question', ['id' => $questionId]);
     }
