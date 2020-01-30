@@ -19,14 +19,7 @@ class QuestionResponseController extends AbstractController
      */
     public function index(Request $request, PaginatorInterface $paginator)
     {   
-
-        if(!is_null($this->getUser())) {
-            $userRoles = $this->getUser()->getRoles();
-        } else {
-            $userRoles = [];
-        }
-
-        if (in_array("ROLE_ADMIN", $userRoles)) {
+        if (!is_null($this->getUser()) && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
             $query = $this->getDoctrine()->getRepository(Question::class)->findAllQuestionJoinTags();
         } else {
             $query = $this->getDoctrine()->getRepository(Question::class)->findAllQuestions();
@@ -51,32 +44,17 @@ class QuestionResponseController extends AbstractController
      */
     public function showQuestion(Request $request, Question $question)
     {   
-        $question = $this->getDoctrine()->getRepository(Question::class)->find($question);
-
-        if(!is_null($this->getUser())) {
-            $userRoles = $this->getUser()->getRoles();
-        } else {
-            $userRoles = [];
-        }
-
-        if (!$question->getIsDisplay() && count($userRoles) <= 1) {
-            return $this->render('question/forbidden.html.twig');
-        }
-
         $response = new Response();
 
-        if(!is_null($this->getUser())) {
-            $userRoles = $this->getUser()->getRoles();
-        } else {
-            $userRoles = [];
-        }
-
-        if (in_array("ROLE_ADMIN", $userRoles)) {
+        if (!is_null($this->getUser()) && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
             $responses = $this->getDoctrine()->getRepository(Response::class)->findBy(
                 ['question' => $question],
                 ['createdAt' => 'ASC']
             );
         } else {
+            if (!$question->getIsDisplay()) {
+                return $this->render('question/forbidden.html.twig');
+            }
             $responses = $this->getDoctrine()->getRepository(Response::class)->findByResponsesDisplay('1', $question);
         }
 
@@ -94,9 +72,9 @@ class QuestionResponseController extends AbstractController
             $user = $this->getUser();
             $response->setUser($user);
     
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($response);
-            $entityManager->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($response);
+            $em->flush();
 
             $this->addFlash(
                 'notice',
@@ -118,8 +96,6 @@ class QuestionResponseController extends AbstractController
      */
     public function addQuestion(Request $request)
     {   
-
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $question = new Question();
 
         $form = $this->createForm(QuestionType::class, $question);
@@ -133,9 +109,9 @@ class QuestionResponseController extends AbstractController
             $user = $this->getUser();
             $question->setUser($user);
     
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($question);
-            $entityManager->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($question);
+            $em->flush();
 
             $this->addFlash(
                 'notice',
@@ -155,8 +131,6 @@ class QuestionResponseController extends AbstractController
      */
     public function selectResponse(Question $question, Response $response)
     {   
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
         $userSecurity = $this->getUser()->getId();
         $userQuestion = $question->getUser()->getId();
 
@@ -179,13 +153,7 @@ class QuestionResponseController extends AbstractController
     {   
         $search = $request->query->get('search-input');
 
-        if(!is_null($this->getUser())) {
-            $userRoles = $this->getUser()->getRoles();
-        } else {
-            $userRoles = [];
-        }
-
-        if (in_array("ROLE_ADMIN", $userRoles)) {
+        if (!is_null($this->getUser()) && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
             $query = $this->getDoctrine()->getRepository(Question::class)->findByString($search);
         } else {
             $query = $this->getDoctrine()->getRepository(Question::class)->findByStringOnlyValidateQuestion($search);
