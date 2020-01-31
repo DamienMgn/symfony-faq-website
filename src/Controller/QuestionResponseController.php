@@ -53,7 +53,7 @@ class QuestionResponseController extends AbstractController
             );
         } else {
             if (!$question->getIsDisplay()) {
-                return $this->render('question/forbidden.html.twig');
+                throw $this->createNotFoundException('La question n\'existe pas');
             }
             $responses = $this->getDoctrine()->getRepository(Response::class)->findByResponsesDisplay('1', $question);
         }
@@ -131,10 +131,8 @@ class QuestionResponseController extends AbstractController
      */
     public function selectResponse(Question $question, Response $response)
     {   
-        $userSecurity = $this->getUser()->getId();
-        $userQuestion = $question->getUser()->getId();
 
-        if ($userSecurity === $userQuestion) {
+        if ($this->getUser() === $question->getUser()) {
             $question->setCorrectResponse($response);
 
             $em = $this->getDoctrine()->getManager();

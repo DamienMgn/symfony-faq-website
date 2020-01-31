@@ -28,10 +28,6 @@ class TagRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('t')
             ->addSelect('q')
             ->join('t.questions', 'q')
-            ->andWhere('q.isDisplay = :dis')
-            ->setParameter('dis', $display)
-            ->andWhere('t = :tag')
-            ->setParameter('tag', $tag)
             ->getQuery();
 
             return $qb->execute();
