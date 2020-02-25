@@ -19,29 +19,11 @@ class ResponseRepository extends ServiceEntityRepository
         parent::__construct($registry, Response::class);
     }
 
-    // /**
-    //  * @return Response[] Returns an array of Response objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-
-    public function findByResponsesDisplay($display, $question): array
+    public function findByResponsesDisplay($question): array
     {
         $qb = $this->createQueryBuilder('r')
             ->andWhere('r.isDisplay = :dis')
-            ->setParameter('dis', $display)
+            ->setParameter('dis', '1')
             ->andWhere('r.question = :question')
             ->setParameter('question', $question)
             ->getQuery();

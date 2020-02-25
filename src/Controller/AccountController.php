@@ -32,7 +32,7 @@ class AccountController extends AbstractController
     /**
      * @Route("/account/update", name="account_update")
      */
-    public function addQuestion(Request $request, UserPasswordEncoderInterface $encoder)
+    public function updateUser(Request $request, UserPasswordEncoderInterface $encoder)
     {   
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');

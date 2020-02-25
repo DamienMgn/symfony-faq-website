@@ -55,7 +55,7 @@ class QuestionResponseController extends AbstractController
             if (!$question->getIsDisplay()) {
                 throw $this->createNotFoundException('La question n\'existe pas');
             }
-            $responses = $this->getDoctrine()->getRepository(Response::class)->findByResponsesDisplay('1', $question);
+            $responses = $this->getDoctrine()->getRepository(Response::class)->findByResponsesDisplay($question);
         }
 
         $form = $this->createForm(ResponseType::class, $response);

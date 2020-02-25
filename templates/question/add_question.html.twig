@@ -2,38 +2,47 @@
 
 {% block body %}
 
+
 <div class="container">
 
     <h3 class="h3 mb-3 font-weight-normal">Posez une question</h3>
 
-{{ form_start(questionForm, { 'attr' : { 'class': 'form-container' } }) }}
-    <div class="my-custom-class-for-errors">
-        {{ form_errors(questionForm) }}
-    </div>
-
-    <div class="form-group row">
-        {{ form_label(questionForm.title) }}
-        <div class="col-sm-10">
-            {{ form_widget(questionForm.title, { 'attr': { 'class' : 'form-control'}} ) }}
+    {{ form_start(questionForm, { 'attr' : { 'class': 'form-container' } }) }}
+        {% if form_errors(questionForm.title) is not empty %}
+            <div class="alert alert-dismissible alert-danger">
+            {{ form_errors(questionForm.title) }}
+            </div>
+        {% endif %}
+        <div class="form-group row">
+            {{ form_label(questionForm.title) }}
+            <div class="col-sm-10">
+                {{ form_widget(questionForm.title, { 'attr': { 'class' : 'form-control'}} ) }}
+            </div>
         </div>
-    </div>
-    <div class="form-group row">
-        {{ form_label(questionForm.body) }}
-        <div class="col-sm-10">
-            {{ form_widget(questionForm.body, { 'attr': { 'class' : 'form-control'}} ) }}
+        {% if form_errors(questionForm.body) is not empty %}
+            <div class="alert alert-dismissible alert-danger">
+            {{ form_errors(questionForm.body) }}
+            </div>
+        {% endif %}
+        <div class="form-group row">
+            {{ form_label(questionForm.body) }}
+            <div class="col-sm-10">
+                {{ form_widget(questionForm.body, { 'attr': { 'class' : 'form-control'}} ) }}
+            </div>
         </div>
-    </div>
-    <div class="form-group row">
+        <div class="form-group row">
             {{ form_label(questionForm.tags) }}
             <div class="col-sm-10">
                 {{ form_widget(questionForm.tags, { 'attr': { 'class' : 'form-control'}} ) }}
             </div>
         </div>
-        {{ form_widget(questionForm.save, { 'attr': { 'class' : 'btn btn-primary'}} ) }}
-    </div>
-{{ form_end(questionForm) }}
+        <div>
+            {{ form_widget(questionForm.save, { 'attr': { 'class' : 'btn btn-primary'}} ) }}
+        </div>
+    {{ form_end(questionForm) }}
 
 
 </div>
 
 {% endblock %}
+

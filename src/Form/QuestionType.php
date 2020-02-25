@@ -16,10 +16,12 @@ class QuestionType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'required' => true
+                'required' => true,
+                'attr' => ['maxlength' => 255]
             ])
             ->add('body', TextareaType::class, [
-                'required' => true
+                'required' => true,
+                'attr' => ['maxlength' => 1200]
             ])
             ->add('tags')
             ->add('save', SubmitType::class)
