@@ -19,6 +19,8 @@ class QuestionResponseController extends AbstractController
      */
     public function index(Request $request, PaginatorInterface $paginator)
     {   
+
+        // On vérifie le rôle de l'utilisateur pour lui retourner les questions adéquates
         if (!is_null($this->getUser()) && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
             $query = $this->getDoctrine()->getRepository(Question::class)->findAllQuestionJoinTags();
         } else {
@@ -62,6 +64,7 @@ class QuestionResponseController extends AbstractController
 
         $form->handleRequest($request);
 
+        // Soumission du formulaire
         if ($form->isSubmitted() && $form->isValid()) {
 
             $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -102,6 +105,7 @@ class QuestionResponseController extends AbstractController
 
         $form->handleRequest($request);
 
+        // Soumission du formulaire
         if ($form->isSubmitted() && $form->isValid()) {
 
             $question = $form->getData();
@@ -128,6 +132,8 @@ class QuestionResponseController extends AbstractController
 
     /**
      * @Route("/question/select_response/{response}/{question}", methods={"POST"}, name="select_response")
+     * 
+     * Choix de la bonne réponse par l'utilisateur
      */
     public function selectResponse(Question $question, Response $response)
     {   

@@ -22,7 +22,6 @@ class QuestionRepository extends ServiceEntityRepository
     /**
     * @return Question[] Returns an array of Question objects
     */
-    
     public function findAllQuestionJoinTags()
     {
         $qb = $this->createQueryBuilder('q')
@@ -34,6 +33,9 @@ class QuestionRepository extends ServiceEntityRepository
         return $qb->getQuery();
     }
 
+    /**
+    * @return Question[] Returns an array of Question objects
+    */
     public function findAllQuestions()
     {
         $qb = $this->createQueryBuilder('q')
@@ -45,6 +47,9 @@ class QuestionRepository extends ServiceEntityRepository
         return $qb->getQuery();
     }
     
+    /**
+    * @return Question[] Returns an array of Question objects
+    */
     public function findByString($value)
     {
         $qb = $this->createQueryBuilder('q')
@@ -56,6 +61,9 @@ class QuestionRepository extends ServiceEntityRepository
         return $qb->getQuery();
     }
 
+    /**
+    * @return Question[] Returns an array of Question objects
+    */
     public function findByStringOnlyValidateQuestion($value)
     {
         $qb = $this->createQueryBuilder('q')

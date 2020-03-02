@@ -4,6 +4,7 @@
 
 <div class="container">
 
+    {# Flash Message #}
     {% for message in app.flashes('notice') %}
     <div class="alert alert-dismissible alert-success">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -24,6 +25,7 @@
     <p class="show-question">{{ question.body }}</p>
     <div class="responses-container">
 
+{# On affiche les réponses #}
 {% for response in responses %}
 
     <div class="card bg-{% if question.correctResponse.id is defined and question.correctResponse.id == response.id %}info text-black correct-response
@@ -44,6 +46,7 @@
             </form>
             {% endif %}
 
+            {# Formulaire Admin #}
             {% if is_granted('ROLE_ADMIN') %}
 
             <form method="POST" action="{{ path('moderate_response', {'response': response.id}) }}">
@@ -90,6 +93,7 @@
 
     </div>
 
+{# Formulaire répondre à la question #}
 {% if is_granted(['ROLE_ADMIN', 'ROLE_USER']) %}
 
 <h3>Répondre à la question</h3>

@@ -7,6 +7,7 @@
 
     <h3 class="h3 mb-3 font-weight-normal">Posez une question</h3>
 
+    {# Ajout d'une question #}
     {{ form_start(questionForm, { 'attr' : { 'class': 'form-container' } }) }}
         {% if form_errors(questionForm.title) is not empty %}
             <div class="alert alert-dismissible alert-danger">

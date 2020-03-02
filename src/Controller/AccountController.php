@@ -31,6 +31,8 @@ class AccountController extends AbstractController
 
     /**
      * @Route("/account/update", name="account_update")
+     * 
+     * Informations personnelles de l'utilisateur
      */
     public function updateUser(Request $request, UserPasswordEncoderInterface $encoder)
     {   
@@ -69,6 +71,8 @@ class AccountController extends AbstractController
 
     /**
      * @Route("/account/questions", name="account_questions")
+     * 
+     * Questions de l'utilisateur
      */
     public function userQuestions()
     {   
@@ -85,6 +89,8 @@ class AccountController extends AbstractController
 
     /**
      * @Route("/account/responses", name="account_responses")
+     * 
+     * Réponses de l'utilisateur
      */
     public function userResponses()
     {   
